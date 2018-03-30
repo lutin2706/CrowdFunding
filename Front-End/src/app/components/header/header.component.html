@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light">
+  <a class="navbar-brand" href="#" routerLink="projet/create">
+    <button type="button" class="btn btn-light">+</button>
+    Nouveau projet
+  </a>
+  <a href="#" routerLink="/"><h1>Ladies First</h1></a>
+  <ng-container *ngIf="user">
+    <span class="my-2 my-lg-0" >
+      <p class="ml-2">Connecté(e) en tant que {{user.username}}</p>
+      <a class="my-2 my-lg-0" href="#" (click)="logout()" >
+        <button type="button" class="btn btn-light">Me déconnecter</button>
+      </a>
+    </span>
+  </ng-container>
+  <ng-container *ngIf="user == null">
+    <span class="my-2 my-lg-0" >
+      Vous n'êtes pas connecté(e)
+      <a href="#" routerLink="/login" >
+        <button type="button" class="btn btn-light">Me connecter</button>
+      </a>
+    </span>
+  </ng-container>
+</nav>

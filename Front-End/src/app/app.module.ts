@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShowProjetComponent } from './components/show-projet/show-projet.component';
+import { FormProjetComponent } from './components/form-projet/form-projet.component';
 
 const routes: Route[] = [
   {
@@ -23,6 +24,10 @@ const routes: Route[] = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'projet/create',
+    component: FormProjetComponent
   },
   {
     path: 'projet/:id',
@@ -37,7 +42,8 @@ const routes: Route[] = [
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    ShowProjetComponent
+    ShowProjetComponent,
+    FormProjetComponent
   ],
   imports: [
     BrowserModule,

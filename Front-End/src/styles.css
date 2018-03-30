@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-.btn-primary, .btn-primary:active {
-  background-color: palevioletred;
-  border-color: palevioletred;
+.btn-light, .btn-light:active, btn-light:focus {
+  background-color: #d81b60;
+  border-color: #d81b60;
 }
 
- .btn-primary:hover {
-   background-color: pink;
-   border-color: palevioletred;
+ .btn-light:hover {
+   background-color: palevioletred;
+   border-color: #d81b60;
  }

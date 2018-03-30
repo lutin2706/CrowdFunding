@@ -1,0 +1,27 @@
+nav {
+  margin-bottom: 1em;
+}
+
+a, a:hover, a:active, a:focus {
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.navbar, .navbar-brand {
+  background-color: #d81b60;
+  color: whitesmoke;
+}
+
+h1, h2 {
+  color: whitesmoke;
+}
+
+.btn-light, .btn-light:active, btn-light:focus {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.btn-light:hover {
+  background-color: palevioletred;
+  border-color: #f8f9fa;
+}
