@@ -1,5 +1,7 @@
 package be.superteam.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Statut {
 
 	BROUILLON("brouillon"),
@@ -9,14 +11,19 @@ public enum Statut {
 	ATTENTE_SUPPRESSION("en attente de suppression"),
 	SUPPRIME("supprimé");
 	
-	private String name = "brouillon";
+	private String name;
 	
 	Statut(String name) {
 		this.name = name;
 	}
 
+	@JsonValue
 	public String getName() {
 		return name;
 	}
-	
+
+	@Override
+	public String toString() {
+		return  name;
+	}
 }

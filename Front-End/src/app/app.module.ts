@@ -11,6 +11,9 @@ import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {AdminService} from "./services/admin.service";
 import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ShowProjetComponent } from './components/show-projet/show-projet.component';
 
 const routes: Route[] = [
   {
@@ -20,6 +23,10 @@ const routes: Route[] = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'projet/:id',
+    component: ShowProjetComponent
   }
 ];
 
@@ -27,7 +34,10 @@ const routes: Route[] = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent,
+    ShowProjetComponent
   ],
   imports: [
     BrowserModule,

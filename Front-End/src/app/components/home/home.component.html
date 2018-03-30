@@ -1,3 +1,11 @@
-<p>
-  home works!
-</p>
+<h2>Projets les plus tendances</h2>
+<div *ngIf="errorMessage != null" class="alert alert-danger" role="alert">
+  {{errorMessage}}<br>
+</div>
+
+<div class="row">
+  <div class="col" *ngFor="let projet of projets">
+    <p><img src="{{projet.image}}"></p>
+    <a href="#" routerLink="projet/{{projet.id}}"><p>{{projet.nom}}</p></a>
+  </div>
+</div>

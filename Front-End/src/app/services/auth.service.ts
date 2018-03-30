@@ -38,4 +38,8 @@ export class AuthService {
     }
   }
 
+  public logout(): void {
+    localStorage.removeItem('token');
+    this.connectedUser.emit(null);
+  }
 }

@@ -4,14 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Projet {
@@ -38,8 +31,9 @@ public class Projet {
 	
 //	@ManyToOne
 //	@JoinColumn(nullable = false)
+	@Enumerated(value = EnumType.STRING)
 	@Column(nullable = false)
-	private Statut statut;
+	private Statut statut = Statut.BROUILLON;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -52,6 +46,17 @@ public class Projet {
 	private Set<TypeContribution> typesContributions = new HashSet<>();
 
 	protected Projet() {
+	}
+
+	public Projet(String nom, LocalDate dateFin, int montant, String image, String description, User entrepreneuse, Statut statut, Categorie categorie) {
+		this.nom = nom;
+		this.dateFin = dateFin;
+		this.montant = montant;
+		this.image = image;
+		this.description = description;
+		this.entrepreneuse = entrepreneuse;
+		this.statut = statut;
+		this.categorie = categorie;
 	}
 
 	public long getId() {

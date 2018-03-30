@@ -19,10 +19,9 @@ export class LoginComponent implements OnInit {
       user => {
         if (user != null) {
           this.router.navigate([''])
+        } else {
+          this.errorMessage = "Une erreur interne s'est produite, veuillez ré-essayer plus tard."
         }
-      },
-      err => {
-        this.errorMessage = null;
       }
     )
   }

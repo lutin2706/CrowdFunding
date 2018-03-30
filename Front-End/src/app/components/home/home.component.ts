@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
-import {User} from "../../models/user";
+import {AdminService} from "../../services/admin.service";
+import {Projet} from "../../models/projet";
 
 @Component({
   selector: 'app-home',
@@ -9,17 +9,18 @@ import {User} from "../../models/user";
 })
 export class HomeComponent implements OnInit {
 
-  user: User;
+  projets: Projet[];
+  errorMessage: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.authService.connectedUser.subscribe(
-      user => {
-        this.user = user;
-       },
-      err => this.user = null
+    this.adminService.getProjetsVisibles().subscribe(
+      projets => this.projets = projets,
+      err => {
+        this.projets = null;
+        this.errorMessage = "Erreur de connexion avec le serveur"
+      }
     );
   }
-
 }

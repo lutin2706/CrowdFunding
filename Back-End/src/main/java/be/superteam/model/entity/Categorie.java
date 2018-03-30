@@ -26,6 +26,10 @@ public class Categorie {
 	protected Categorie() {
 	}
 
+	public Categorie(String nom) {
+		this.nom = nom;
+	}
+
 	public long getId() {
 		return id;
 	}
