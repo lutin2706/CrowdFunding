@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
         return userDao.save(user);
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
     public Authority createOrGetAuthority(String authority) {
 
         Authority found = authorityDao.findByAuthority(authority);

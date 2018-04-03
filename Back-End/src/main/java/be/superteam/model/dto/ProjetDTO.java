@@ -22,7 +22,10 @@ public class ProjetDTO {
 
     private Statut statut;
 
-    private Categorie categorie;
+    private Long categorieId;
+
+    public ProjetDTO() {
+    }
 
     public ProjetDTO(Projet projet) {
         this.id = projet.getId();
@@ -33,7 +36,7 @@ public class ProjetDTO {
         this.description = projet.getDescription();
         this.entrepreneuse = projet.getEntrepreneuse().getUsername();
         this.statut = projet.getStatut();
-        this.categorie = projet.getCategorie();
+        this.categorieId = projet.getCategorie().getId();
     }
 
     public long getId() {
@@ -100,11 +103,15 @@ public class ProjetDTO {
         this.statut = statut;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public long getCategorieId() {
+        return categorieId;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategorie(long categorieId) {
+        this.categorieId = categorieId;
+    }
+
+    public Projet toProjet(User entrepreneuse, Categorie categorie, Statut statut) {
+        return new Projet(this.nom, this.dateFin, this.montant, this.image, this.description, entrepreneuse, statut, categorie);
     }
 }

@@ -10,5 +10,6 @@ export class Projet {
               public description: string,
               public entrepreneuse: string,
               public statut: string,
-              public categorie: Categorie) { }
+              public categorieId: number,
+              public contributions: string[]) { }
 }

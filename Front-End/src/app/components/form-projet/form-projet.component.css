@@ -1,0 +1,12 @@
+.right {
+  text-align: right;
+}
+
+.form-control {
+  width: 80%;
+  margin-right: 10px;
+}
+
+.row {
+  margin-bottom: 10px;
+}

@@ -1,44 +1,69 @@
+<div *ngIf="errorMessage != null" class="alert alert-danger" role="alert">
+  {{errorMessage}}<br>
+</div>
 <h2>Proposer un projet</h2>
-<form>
+<form #projetForm="ngForm" (submit)="onSubmit(projetForm)" >
   <div class="row">
     <div class="col-md-6">
       <div class="form-group form">
         <label for="nom">Nom du projet</label>
-        <input type="text" class="form-control" id="nom" aria-describedby="aideNom" >
+        <input type="text" class="form-control" id="nom" aria-describedby="aideNom" name="nom" required ngModel>
         <small id="aideNom" class="form-text text-muted">Soyez créative ! Le nom de votre projet doit donner envie d'y contribuer !</small>
+        <div *ngIf="projetForm.controls['nom']?.dirty && projetForm.controls['nom']?.invalid">
+          Le nom du projet doit être indiqué !
+        </div>
       </div>
       <div class="form-group">
         <label for="categorie">Catégorie</label>
-        <select class="form-control" id="categorie">
-          <option>Catégorie 1</option>
+        <select class="form-control" id="categorie" name="categorieId" required ngModel>
+          <option *ngFor="let categorie of categories" value="{{categorie.id}}">{{categorie.nom}}</option>
         </select>
+        <div *ngIf="projetForm.controls['categorieId']?.dirty && projetForm.controls['categorieId']?.invalid">
+          Une catégorie doit être indiquée !
+        </div>
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="10" aria-describedby="aideDescription"></textarea>
+        <textarea class="form-control" id="description" rows="10" aria-describedby="aideDescription" name="description" required ngModel></textarea>
         <small id="aideDescription" class="form-text text-muted">La description de votre projet doit être aussi précise que possible</small>
+        <div *ngIf="projetForm.controls['description']?.dirty && projetForm.controls['description']?.invalid">
+          Vous devez ajouter une description !
+        </div>
       </div>
       <div class="form-group row">
         <label for="montant" class="col-md-2 col-form-label">Montant</label>
-        <input type="number" class="form-control col-md-10" id="montant" >
+        <input type="number" class="form-control col-md-10" id="montant" name="montant" required ngModel >
+        <div *ngIf="projetForm.controls['montant']?.dirty && projetForm.controls['montant']?.invalid">
+          Un montant doit être indiqué !
+        </div>
       </div>
    </div>
   <div class="col-md-6">
     <div class="form-group row">
       <label for="dateFin" class="col-md-3 col-form-label">Date de fin</label>
-      <input type="date" class="form-control col-md-9" id="dateFin" >
+      <input type="date" class="form-control col-md-9" id="dateFin" name="dateFin" required ngModel >
+      <div *ngIf="projetForm.controls['dateFin']?.dirty && projetForm.controls['dateFin']?.invalid">
+        Une date de fin doit être indiquée !
+      </div>
     </div>
     <div class="form-group row">
       <label for="image" class="col-md-3 col-form-label">Image</label>
-      <input type="file" class="form-control-file col-md-9" id="image">
+      <input type="file" class="form-control-file col-md-9" id="image" name="image" ngModel>
     </div>
     <div class="form-group form">
-      <label for="nom">Contributions</label>
-      <div *ngFor="let contribution of contributions">
-        <input type="text" class="form-control" id="contribution-i" >
+      <label for="nom">Contributions matérielles</label>
+      <ul>
+        <li *ngFor="let contribution of contributions">{{contribution}}</li>
+      </ul>
+      <div class="row">
+        <input type="text" class="form-control" id="contribution" name="contribution" #contribution> <!-- i doit être remplacé par l'index de contributions, name doit être  -->
+        <button type="button" class="btn btn-light" (click)="ajoutContribution(contribution)">+</button>
       </div>
     </div>
-    <button type="submit" class="btn btn-light">Submit</button>
+    <div class="right">
+      <button type="reset" class="btn btn-light">Annuler</button>
+      <button type="submit" class="btn btn-light">Créer mon projet</button>
+    </div>
   </div>
 </div>
 </form>

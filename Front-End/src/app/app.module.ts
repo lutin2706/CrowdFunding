@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShowProjetComponent } from './components/show-projet/show-projet.component';
 import { FormProjetComponent } from './components/form-projet/form-projet.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 const routes: Route[] = [
   {
@@ -43,7 +44,8 @@ const routes: Route[] = [
     HeaderComponent,
     FooterComponent,
     ShowProjetComponent,
-    FormProjetComponent
+    FormProjetComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
