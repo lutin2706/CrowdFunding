@@ -32,6 +32,11 @@ public class TypeContribution {
 	private TypeContribution() {
 	}
 
+	public TypeContribution(String name, Projet projet) {
+		this.name = name;
+		this.projet = projet;
+	}
+
 	public long getId() {
 		return id;
 	}

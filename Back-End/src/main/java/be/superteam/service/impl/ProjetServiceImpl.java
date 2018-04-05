@@ -3,7 +3,9 @@ package be.superteam.service.impl;
 import java.util.List;
 
 import be.superteam.dao.CategorieDao;
+import be.superteam.dao.TypeContributionDao;
 import be.superteam.model.entity.Categorie;
+import be.superteam.model.entity.TypeContribution;
 import org.springframework.stereotype.Service;
 
 import be.superteam.dao.ProjetDao;
@@ -15,10 +17,12 @@ public class ProjetServiceImpl implements ProjetService {
 
 	private ProjetDao projetDao;
 	private CategorieDao categorieDao;
+	private TypeContributionDao typeContributionDao;
 	
-	protected ProjetServiceImpl(ProjetDao projetDao, CategorieDao categorieDao) {
+	protected ProjetServiceImpl(ProjetDao projetDao, CategorieDao categorieDao, TypeContributionDao typeContributionDao) {
 		this.projetDao = projetDao;
 		this.categorieDao = categorieDao;
+		this.typeContributionDao = typeContributionDao;
 	}
 
 	@Override
@@ -39,6 +43,11 @@ public class ProjetServiceImpl implements ProjetService {
 	@Override
 	public Categorie save(Categorie categorie) {
 		return categorieDao.save(categorie);
+	}
+
+	@Override
+	public TypeContribution save(TypeContribution typeContribution) {
+		return typeContributionDao.save(typeContribution);
 	}
 
 	@Override

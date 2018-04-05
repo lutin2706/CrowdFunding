@@ -11,5 +11,6 @@ export class Projet {
               public entrepreneuse: string,
               public statut: string,
               public categorieId: number,
-              public contributions: string[]) { }
+              public typesContributions: number[],
+              public montantRecolte: number) { }
 }

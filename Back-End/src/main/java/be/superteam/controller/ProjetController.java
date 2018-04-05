@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import be.superteam.model.dto.ProjetDTO;
+import be.superteam.model.dto.TypeContributionDTO;
 import be.superteam.model.entity.Statut;
 import be.superteam.service.CategorieService;
 import be.superteam.service.UserService;
@@ -44,12 +45,18 @@ public class ProjetController {
 		return new ProjetDTO(projetService.findProjet(id));
 	}
 
-	@PostMapping("/user/projet/")
+	@PostMapping("/user/projet")
 	public ProjetDTO createProjet(@RequestBody ProjetDTO projetDto, Principal principal) {
 		return new ProjetDTO(projetService.save(projetDto.toProjet(
 		        userService.findByUsername(principal.getName()),
                 categorieService.findById(projetDto.getCategorieId()),
                 Statut.PUBLIE
         )));
+	}
+
+	@PostMapping("/user/typeContribution")
+	public TypeContributionDTO createTypeContribution(@RequestBody TypeContributionDTO typeContributionDTO) {
+		Projet projet = projetService.findProjet(typeContributionDTO.getProjetId());
+		return new TypeContributionDTO(projetService.save(typeContributionDTO.toTypeContribution(projet)));
 	}
 }

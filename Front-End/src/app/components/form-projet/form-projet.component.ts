@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {AuthService} from "../../services/auth.service";
 import {Projet} from "../../models/projet";
+import {forEach} from "@angular/router/src/utils/collection";
+import {TypeContribution} from "../../models/type-contribution";
 
 @Component({
   selector: 'app-form-projet',
@@ -14,7 +16,7 @@ import {Projet} from "../../models/projet";
 })
 export class FormProjetComponent implements OnInit {
 
-  contributions: string[];
+  typesContributions: string[];
   categories: Categorie[];
   errorMessage: string;
   user: User;
@@ -36,10 +38,10 @@ export class FormProjetComponent implements OnInit {
   }
 
   public ajoutContribution(contribution: HTMLInputElement): void {
-    if (!this.contributions) {
-      this.contributions = [];
+    if (!this.typesContributions) {
+      this.typesContributions = [];
     }
-    this.contributions.push(contribution.value);
+    this.typesContributions.push(contribution.value);
     contribution.value = '';
   }
 
@@ -47,14 +49,23 @@ export class FormProjetComponent implements OnInit {
     if (projetForm.valid) {
       let projet: Projet = projetForm.value;
       // projet.entrepreneuse = this.user.username; -> TODO à faire en back-end
-      projet.contributions = this.contributions;
       // console.log(projetForm.value.nom);
-      this.adminService.createProjet(projetForm.value).subscribe(
-        projet => this.router.navigate(['']),
+      this.adminService.createProjet(projet).subscribe(
+        proj => {
+          projet.id = proj.id;
+          for (let type of this.typesContributions) {
+            let typeContribution: TypeContribution = new TypeContribution(type, projet.id);
+            this.adminService.createTypeContribution(typeContribution).subscribe(
+              typeContrib => { },
+              err => { this.errorMessage = "Erreur de connexion avec le serveur" }
+            )
+          }
+        },
         err => {
           this.errorMessage = "Erreur de connexion avec le serveur"
         }
-      );
+        )
+        this.router.navigate([''])
     } else {
       console.log(projetForm.errors);
       this.errorMessage = "Le formulaire n'est pas valide. Veuillez corriger les champs indiqués."

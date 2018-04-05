@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,7 @@ export class AuthService {
   public connectedUser: EventEmitter<User> = new EventEmitter<User>();
 
   public login(user: User): void {
-    this.http.post('/api/login', user, {observe: 'response'}).subscribe(
+    this.http.post(environment.api_url + '/api/login', user, {observe: 'response'}).subscribe(
       res => {
 
         let token = res.headers.get('Authorization').substr(7);
@@ -29,7 +30,7 @@ export class AuthService {
     // Voir services/auth.interceptor.ts
 
     if (localStorage.getItem('token') != null) {
-      this.http.get<User>('/api/user/whoami').subscribe(
+      this.http.get<User>(environment.api_url + '/api/user/whoami').subscribe(
         user => this.connectedUser.emit(user),
         err => this.connectedUser.emit(null)
       );

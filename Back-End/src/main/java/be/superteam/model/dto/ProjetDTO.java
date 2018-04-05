@@ -2,6 +2,8 @@ package be.superteam.model.dto;
 
 import be.superteam.model.entity.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ProjetDTO {
@@ -24,6 +26,10 @@ public class ProjetDTO {
 
     private Long categorieId;
 
+    private int montantRecolte;
+
+    private List<Long> typesContributions;
+
     public ProjetDTO() {
     }
 
@@ -37,6 +43,8 @@ public class ProjetDTO {
         this.entrepreneuse = projet.getEntrepreneuse().getUsername();
         this.statut = projet.getStatut();
         this.categorieId = projet.getCategorie().getId();
+        this.montantRecolte = projet.getContributions().stream().mapToInt(contrib -> contrib.getMontant()).sum();
+        this.typesContributions = projet.getTypesContributions().stream().map(type -> type.getId()).collect(Collectors.toList());
     }
 
     public long getId() {
@@ -103,12 +111,28 @@ public class ProjetDTO {
         this.statut = statut;
     }
 
-    public long getCategorieId() {
+    public Long getCategorieId() {
         return categorieId;
     }
 
-    public void setCategorie(long categorieId) {
+    public void setCategorieId(Long categorieId) {
         this.categorieId = categorieId;
+    }
+
+    public int getMontantRecolte() {
+        return montantRecolte;
+    }
+
+    public void setMontantRecolte(int montantRecolte) {
+        this.montantRecolte = montantRecolte;
+    }
+
+    public List<Long> getTypesContributions() {
+        return typesContributions;
+    }
+
+    public void setTypesContributions(List<Long> typesContributions) {
+        this.typesContributions = typesContributions;
     }
 
     public Projet toProjet(User entrepreneuse, Categorie categorie, Statut statut) {

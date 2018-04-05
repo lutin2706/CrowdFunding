@@ -5,6 +5,7 @@ import java.util.List;
 import be.superteam.model.entity.Categorie;
 import be.superteam.model.entity.Projet;
 import be.superteam.model.entity.Statut;
+import be.superteam.model.entity.TypeContribution;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ProjetService {
@@ -15,7 +16,9 @@ public interface ProjetService {
 
     Projet save(Projet projet);
 
+    Projet findProjet(long id);
+
     Categorie save(Categorie categorie);
 
-    Projet findProjet(long id);
+    TypeContribution save(TypeContribution typeContribution);
 }

@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
+@Entity(name="utilisateur")
 public class User extends BaseEntity implements UserDetails {
 
 	private static final long serialVersionUID = -8539232058145148974L;

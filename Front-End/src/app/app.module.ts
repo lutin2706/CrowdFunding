@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ShowProjetComponent } from './components/show-projet/show-projet.component';
 import { FormProjetComponent } from './components/form-projet/form-projet.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { ContributionComponent } from './components/contribution/contribution.component';
 
 const routes: Route[] = [
   {
@@ -33,6 +34,10 @@ const routes: Route[] = [
   {
     path: 'projet/:id',
     component: ShowProjetComponent
+  },
+  {
+    path: 'projet/contribute/:id',
+    component: ContributionComponent
   }
 ];
 
@@ -45,7 +50,8 @@ const routes: Route[] = [
     FooterComponent,
     ShowProjetComponent,
     FormProjetComponent,
-    SideBarComponent
+    SideBarComponent,
+    ContributionComponent
   ],
   imports: [
     BrowserModule,
