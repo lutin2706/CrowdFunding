@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-body">
+    <h5>Objectif</h5>
+    <p>{{projet?.montant}} €</p>
+    <h5>Montant récolté</h5>
+    <p>{{projet?.montantRecolte}} €</p>
+    <h5>Date de fin</h5>
+    <p>{{projet?.dateFin | date:'d/MM/yyyy'}}</p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h5>Entrepreneuse</h5>
+    <p>{{projet?.entrepreneuse}}</p>
+  </div>
+</div>
+<div>
+  <button type="button" class="btn btn-light" routerLink="/projet/contribute/{{projet?.id}}">Contribuer</button>
+</div>
