@@ -54,7 +54,7 @@ export class FormProjetComponent implements OnInit {
         proj => {
           projet.id = proj.id;
           for (let type of this.typesContributions) {
-            let typeContribution: TypeContribution = new TypeContribution(type, projet.id);
+            let typeContribution: TypeContribution = new TypeContribution(0, type, projet.id);
             this.adminService.createTypeContribution(typeContribution).subscribe(
               typeContrib => { },
               err => { this.errorMessage = "Erreur de connexion avec le serveur" }

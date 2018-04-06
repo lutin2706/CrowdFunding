@@ -21,4 +21,6 @@ public interface ProjetService {
     Categorie save(Categorie categorie);
 
     TypeContribution save(TypeContribution typeContribution);
+
+    List<TypeContribution> getAllByProjet(long projetId);
 }

@@ -53,7 +53,7 @@
     <div class="form-group form">
       <label for="nom">Contributions matérielles</label>
       <ul>
-        <li *ngFor="let contribution of contributions">{{contribution}}</li>
+        <li *ngFor="let contribution of typesContributions">{{contribution}}</li>
       </ul>
       <div class="row">
         <input type="text" class="form-control" id="contribution" name="contribution" #contribution> <!-- i doit être remplacé par l'index de contributions, name doit être  -->

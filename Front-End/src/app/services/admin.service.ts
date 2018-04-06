@@ -1,6 +1,5 @@
 import {EventEmitter, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {User} from "../models/user";
 import {Observable} from "rxjs/Observable";
 import {Projet} from "../models/projet";
 import {Categorie} from "../models/categorie";
@@ -31,5 +30,9 @@ export class AdminService {
 
   public createTypeContribution(typeContribution: TypeContribution): Observable<TypeContribution> {
     return this.http.post<TypeContribution>(environment.api_url + '/api/user/typeContribution', typeContribution);
+  }
+
+  public getTypesContributions(projetId: number): Observable<TypeContribution[]> {
+    return this.http.get<TypeContribution[]>(environment.api_url + '/api/user/typesContribution/' + projetId);
   }
 }

@@ -13,6 +13,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -51,11 +58,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .anyRequest().authenticated()
 	                .and().exceptionHandling()
 	                .authenticationEntryPoint((request, response, exception) -> response.sendError(401))  // Pas redirection vers page de login (défaut si site propre), mais envoi d'une erreur "401"
-	                .and()          // Interception des requêtes par un filtre
+					.and()          // Interception des requêtes par un filtre
 	                .addFilter(new JwtAuthenticationFilter(authenticationManager(), secret))    // Authentification
 	                .addFilter(new JwtAuthorizationFilter(authenticationManager(), secret))    // Autorisation (vérification du token)
-	                .csrf().disable() // Validation directe sur notre propre site (désactivé si API)
+	                .cors().and()
+					.csrf().disable() // Validation directe sur notre propre site (désactivé si API)
 	                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Validation par token, et plus par session
 	   }
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() { // Remplacer par WebMvcConfigurerAdapter sur Spring Boot < 2.0.0
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*").allowedHeaders("Authorization").exposedHeaders("Authorization");
+			}
+		};
+	}
+//	@Bean
+//	CorsConfigurationSource corsConfigurationSource() {
+//		CorsConfiguration configuration = new CorsConfiguration();
+//		configuration.setAllowedOrigins(Arrays.asList("*"));
+//		configuration.setAllowedMethods(Arrays.asList("GET","POST", "OPTIONS", "PUT", "DELETE"));
+//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		source.registerCorsConfiguration("/**", configuration);
+//		return source;
+//	}
 
 }

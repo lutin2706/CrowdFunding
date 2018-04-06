@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import be.superteam.model.dto.ProjetDTO;
 import be.superteam.model.dto.TypeContributionDTO;
 import be.superteam.model.entity.Statut;
+import be.superteam.model.entity.TypeContribution;
 import be.superteam.service.CategorieService;
 import be.superteam.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -58,5 +59,11 @@ public class ProjetController {
 	public TypeContributionDTO createTypeContribution(@RequestBody TypeContributionDTO typeContributionDTO) {
 		Projet projet = projetService.findProjet(typeContributionDTO.getProjetId());
 		return new TypeContributionDTO(projetService.save(typeContributionDTO.toTypeContribution(projet)));
+	}
+
+	@GetMapping("/user/typesContribution/{projetId}")
+	public List<TypeContributionDTO> getTypesContribution(@PathVariable Long projetId) {
+		List<TypeContribution> typeContributions = projetService.getAllByProjet(projetId);
+		return typeContributions.stream().map(type -> new TypeContributionDTO(type)).collect(Collectors.toList());
 	}
 }

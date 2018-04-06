@@ -51,6 +51,11 @@ public class ProjetServiceImpl implements ProjetService {
 	}
 
 	@Override
+	public List<TypeContribution> getAllByProjet(long projetId) {
+		return typeContributionDao.getAllByProjet(projetDao.findById(projetId));
+	}
+
+	@Override
 	public Projet findProjet(long id) {
 		return projetDao.findById(id);
 	}
