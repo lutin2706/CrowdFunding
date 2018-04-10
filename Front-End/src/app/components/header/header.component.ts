@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
       user => this.user = user,
       err => this.user = null
     );
+    this.authService.whoAmI();
   }
 
   public logout(): void {

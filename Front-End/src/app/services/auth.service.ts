@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 import {environment} from "../../environments/environment";
@@ -14,7 +14,6 @@ export class AuthService {
   public login(user: User): void {
     this.http.post(environment.api_url + '/api/login', user, {observe: 'response'}).subscribe(
       res => {
-
         let token = res.headers.get('Authorization').substr(7);
         localStorage.setItem('token', token); // On peut l'appeler autrement pour brouiller les pistes
         this.whoAmI();

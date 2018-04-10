@@ -22,7 +22,8 @@ public class Projet {
 	private int montant;
 	
 	private String image;
-	
+
+	// TODO: mettre une description longue (et pas limitée à 255 caractères)
 	private String description;
 	
 	@ManyToOne

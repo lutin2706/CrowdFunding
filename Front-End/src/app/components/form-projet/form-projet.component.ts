@@ -28,6 +28,7 @@ export class FormProjetComponent implements OnInit {
       user => this.user = user,
       err => this.user = null
     );
+    // TODO: en cas d'erreur du server (genre description trop longue), afficher l'erreur à l'écran
     this.adminService.getCategories().subscribe(
       categories => this.categories = categories,
       err => {

@@ -16,6 +16,6 @@ public interface ProjetDao extends JpaRepository<Projet, Long> {
 
 	Projet findById(long id);
 
-	@Query("SELECT p from Projet p WHERE p.statut = 'publié' OR p.statut = 'validé' OR p.statut = 'en attente de suppression'")
+	@Query("SELECT p from Projet p WHERE p.statut = 'PUBLIE' OR p.statut = 'VALIDE' OR p.statut = 'ATTENTE_SUPPRESSION'")
     List<Projet> findProjetsVisibles();
 }
